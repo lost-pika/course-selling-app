@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const Purchase = require("../models/purchase.model");
+const Course = require("../models/course.model");
 
 const signup = async (req, res) => {
   const { email, firstname, lastname, password } = req.body;
@@ -74,9 +75,14 @@ const previewPurchases = async (req, res) => {
   try {
     const purchases = await Purchase.find({userId});
 
+    const courseData = await Course.find({
+      _id: { $in: purchases.map(x => x.courseId)}
+    })
+
     return res.status(200).json({
       count: purchases.length,
       purchases,
+      courseData
     });
   } catch (error) {
     return res.status(500).json({
