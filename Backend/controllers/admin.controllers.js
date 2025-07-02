@@ -62,7 +62,7 @@ const signin = async (req, res) => {
       sameSite: "strict",
     });
 
-    res.status(200).json({ message: "Logged in successfully" });
+    res.status(200).json({ message: "Logged in successfully", token: token });
   } catch (error) {
     console.error("login error:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -70,7 +70,7 @@ const signin = async (req, res) => {
 };
 
 const createCourse = async (req, res) => {
-  const adminId = req.admin._id;
+  const adminId = req.admin.id;
 
   try {
     const { title, description, price, imageUrl } = req.body;
@@ -85,7 +85,7 @@ const createCourse = async (req, res) => {
 
     res.json({
       message: "Course created",
-      creatorId: course._id,
+      courseId: course._id,
     });
   } catch (error) {
     console.error(error);
@@ -94,10 +94,11 @@ const createCourse = async (req, res) => {
 };
 
 const updateCourse = async (req, res) => {
-  const adminId = req.admin._id;
+  const adminId = req.admin.id;
 
   try {
-    const { courseId } = req.params;
+    const courseId = req.params.id;
+    console.log(courseId)
     const { title, description, price, imageUrl } = req.body;
 
     // Find course first to verify creator
@@ -120,6 +121,17 @@ const updateCourse = async (req, res) => {
     course.price = price || course.price;
     course.imageUrl = imageUrl || course.imageUrl;
 
+    // await Course.findByIdAndUpdate(
+    //   courseId,
+    //   {
+    //     ...(title && { title }),
+    //     ...(description && { description }),
+    //     ...(price && { price }),
+    //     ...(imageUrl && { imageUrl }),
+    //   },
+    //   { new: true } // returns updated document
+    // );
+
     await course.save();
 
     res.json({ message: "Course updated", course });
@@ -130,7 +142,7 @@ const updateCourse = async (req, res) => {
 };
 
 const getCoursesByAdmin = async (req, res) => {
-  const adminId = req.admin._id; // extracted from JWT by adminMiddleware
+  const adminId = req.admin.id; // extracted from JWT by adminMiddleware
 
   try {
     const courses = await Course.find({ creatorId: adminId });
@@ -145,7 +157,6 @@ const getCoursesByAdmin = async (req, res) => {
   }
 };
 
-
 module.exports = {
   signup,
   signin,
@@ -153,3 +164,20 @@ module.exports = {
   updateCourse,
   getCoursesByAdmin,
 };
+
+
+// {
+//   "title": "kahaniya part-2",
+//       "description": "story of two strangers",
+//       "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2024%2F05%2F16%2Fmovies%2Fthe-strangers-chapter-1-review.html&psig=AOvVaw0WR3SKQkxae6LatYQdVQiX&ust=1751550886144000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID87Nmpno4DFQAAAAAdAAAAABAE",
+//       "price": 499
+// }
+
+// 68655e8b6840c66546f4e749
+
+// {
+//   "title": "haddi buddy",
+//       "description": "my favourite cartoon",
+//       "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2024%2F05%2F16%2Fmovies%2Fthe-strangers-chapter-1-review.html&psig=AOvVaw0WR3SKQkxae6LatYQdVQiX&ust=1751550886144000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID87Nmpno4DFQAAAAAdAAAAABAE",
+//       "price": 999
+// }
