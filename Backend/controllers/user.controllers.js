@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const Purchase = require("../models/purchase.model");
 
 const signup = async (req, res) => {
   const { email, firstname, lastname, password } = req.body;
@@ -68,7 +69,23 @@ const signin = async (req, res) => {
   }
 };
 
+const previewPurchases = async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const purchases = await Purchase.find({userId});
+
+    return res.status(200).json({
+      purchases,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Internal server error"
+    })
+  }
+};
+
 module.exports = {
   signup,
   signin,
+  previewPurchases,
 };

@@ -1,25 +1,13 @@
 const express = require('express');
 const courseRouter = express.Router();
-
-// see all the offered courses
-courseRouter.get('/', (req, res) => {
-    res.json({
-        message: "signup endpoint"
-    })
-});
+const {previewCourses} = require("../controllers/course.controller");
+const {purchaseCourse} = require("../controllers/course.controller");
+const {userMiddleware} = require("../middlewares/user.middleware")
 
 // when a user wants to purchase a course
-courseRouter.post('/purchase', (req, res) => {
-    res.json({
-        message: "purchase endpoint"
-    })
-});
+courseRouter.post('/purchase',userMiddleware, purchaseCourse );
 
-courseRouter.get('/preview', (req, res) => {
-    res.json({
-        message: "course preview endpoint"
-    })
-});
+courseRouter.get('/preview',userMiddleware, previewCourses);
 
 
 module.exports = courseRouter;

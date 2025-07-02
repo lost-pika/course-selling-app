@@ -98,7 +98,7 @@ const updateCourse = async (req, res) => {
 
   try {
     const courseId = req.params.id;
-    console.log(courseId)
+    console.log(courseId);
     const { title, description, price, imageUrl } = req.body;
 
     // Find course first to verify creator
