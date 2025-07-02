@@ -164,20 +164,3 @@ module.exports = {
   updateCourse,
   getCoursesByAdmin,
 };
-
-
-// {
-//   "title": "kahaniya part-2",
-//       "description": "story of two strangers",
-//       "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2024%2F05%2F16%2Fmovies%2Fthe-strangers-chapter-1-review.html&psig=AOvVaw0WR3SKQkxae6LatYQdVQiX&ust=1751550886144000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID87Nmpno4DFQAAAAAdAAAAABAE",
-//       "price": 499
-// }
-
-// 68655e8b6840c66546f4e749
-
-// {
-//   "title": "haddi buddy",
-//       "description": "my favourite cartoon",
-//       "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nytimes.com%2F2024%2F05%2F16%2Fmovies%2Fthe-strangers-chapter-1-review.html&psig=AOvVaw0WR3SKQkxae6LatYQdVQiX&ust=1751550886144000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID87Nmpno4DFQAAAAAdAAAAABAE",
-//       "price": 999
-// }
