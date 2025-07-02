@@ -40,6 +40,7 @@ const previewCourses = async (req, res) => {
     const courses = await Course.find({});
 
     return res.status(200).json({
+        count: courses.length,
       courses,
     });
   } catch (error) {

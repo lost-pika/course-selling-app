@@ -7,7 +7,7 @@ const {userMiddleware} = require("../middlewares/user.middleware")
 // when a user wants to purchase a course
 courseRouter.post('/purchase',userMiddleware, purchaseCourse );
 
-courseRouter.get('/preview',userMiddleware, previewCourses);
+courseRouter.get('/preview', previewCourses);
 
 
 module.exports = courseRouter;

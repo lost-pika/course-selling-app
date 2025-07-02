@@ -97,7 +97,7 @@ const updateCourse = async (req, res) => {
   const adminId = req.admin.id;
 
   try {
-    const courseId = req.params.id;
+    const courseId = req.body.id;
     console.log(courseId);
     const { title, description, price, imageUrl } = req.body;
 

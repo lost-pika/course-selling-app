@@ -16,7 +16,7 @@ adminRouter.post("/signin", signin);
 adminRouter.post("/course", adminMiddleware, createCourse);
 
 // update the course
-adminRouter.put("/course/:id",adminMiddleware, updateCourse);
+adminRouter.put("/course",adminMiddleware, updateCourse);
 
 // get courses (give me all the courses that I have created)
 adminRouter.get("/course/bulk",adminMiddleware, getCoursesByAdmin);

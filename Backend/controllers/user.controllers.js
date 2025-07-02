@@ -75,6 +75,7 @@ const previewPurchases = async (req, res) => {
     const purchases = await Purchase.find({userId});
 
     return res.status(200).json({
+      count: purchases.length,
       purchases,
     });
   } catch (error) {
